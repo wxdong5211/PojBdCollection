@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 /**
- * Main 3388K	172MS
+ * Main TimeLimitExceeded
  */
 public class Main {
 
