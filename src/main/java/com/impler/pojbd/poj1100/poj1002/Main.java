@@ -1,12 +1,11 @@
 package com.impler.pojbd.poj1100.poj1002;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 /**
- * Main TimeLimitExceeded
+ * Main 11652K	4954MS
  */
 public class Main {
 
@@ -18,12 +17,11 @@ public class Main {
             return;
         }
         cin.nextLine();
-        Map<String,Integer> dict = getDict();
         Map<String,Integer> result = new TreeMap<String, Integer>();
         String line=null;
         Integer times = null;
         for(int i=0;i<row;i++){
-            line = getLineNum(cin.nextLine(), dict);
+            line = getLineNum(cin.nextLine());
             times = result.get(line);
             if(times==null){
                 result.put(line,1);
@@ -34,26 +32,33 @@ public class Main {
         printResult(result);
     }
 
-    public static Map<String,Integer> getDict(){
-        Map<String,Integer> dict = new HashMap<String, Integer>();
-        char start = 'A';
-        for(int i=0;i<25;i++){
-            if(i==16)continue;
-            dict.put("" + (char)(start+i), ((i>16?(i-1)/3:i/3)+2)+'0');
+    public static String getLineNum(String line){
+        char[] orgs = line.toCharArray(),result = new char[8];
+        int len = orgs.length,index = 0;
+        for(int i=0;i<len;i++){
+            if(orgs[i]=='-')continue;
+            if(index==3){
+                result[index] = '-';
+                i--;
+            }else{
+                result[index] = getNum(orgs[i]);
+            }
+            index++;
         }
-        return dict;
+        return new String(result);
     }
 
-    public static String getLineNum(String line,Map<String,Integer> dict){
-        char[] result = line.replaceAll("\\-","").toCharArray();
-        int len = result.length;
-        for(int i=0;i<len;i++){
-            if(result[i]>='A'){
-                result[i] = (char)dict.get(result[i]+"").intValue();
-            }
-        }
-        String nums = new String(result);
-        return nums.substring(0,3)+'-'+nums.substring(3);
+    public static char getNum(char org){
+        if(org<='9')return org;
+        if(org<='C')return '2';
+        if(org<='F')return '3';
+        if(org<='I')return '4';
+        if(org<='L')return '5';
+        if(org<='O')return '6';
+        if(org<='S')return '7';
+        if(org<='V')return '8';
+        if(org<='Y')return '9';
+        return org;
     }
 
     public static void printResult(Map<String,Integer> result){
