@@ -1,0 +1,18 @@
+//test{
+//
+//    jvmArgs = [
+//            '-Djmockit-coverage-outputDir=target/coverage-report',
+//            '-Djmockit-coverage-excludes=com\\.ssh\\..+\\.entity\\..+^|com\\.ssh\\..+\\.vo\\..+'
+//    ]
+//
+//    systemProperties = [
+//        'catalina.base':"${project.buildDir}/test-log"
+//    ]
+//    'org.jmockit:jmockit:1.8',
+//    'org.jmockit:jmockit-coverage:0.999.27',
+//}
+
+dependencies {
+    testCompile 'org.mockito:mockito-core:2.8.47',
+     'junit:junit:4.12'
+}

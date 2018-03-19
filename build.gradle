@@ -1,0 +1,60 @@
+apply plugin : 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+group = 'com.impler.pojbd'
+version = '1.0'
+buildDir = 'target'
+
+
+tasks.withType(AbstractCompile){
+  if(it.hasProperty('options')){
+    options?.encoding = "UTF-8"
+  }
+}
+
+//task wrapper(type: Wrapper){
+  //gradleVersion = project.gradleWrapperVersion
+  //distributionUrl = 'http://proxy.com/your-gradle-zip-path.zip'
+//}
+
+repositories {
+    mavenLocal()
+    maven {
+        name 'nexus'
+        url 'http://m2.ys.com:8081/nexus/content/groups/public/'
+    }
+    mavenCentral()
+    maven {
+        name 'jboss-snapshots'
+        url 'https://repository.jboss.org/nexus/content/repositories/releases/'
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Created-By' : 'Gralde',
+            'Build-Jdk' : System.getProperty('user.name'),
+            'Built-By' : System.getProperty('java.version'),
+            'Specification-Title' : project.name,
+            'Specification-Version' : project.version,
+            'Implementation-Title' : project.name,
+            'Implementation-Version' : project.version,
+            'Implementation-Vendor-Id' : project.group
+    }
+}
+
+//javadoc{
+//    options?.encoding = "UTF-8"
+//    failOnError = false
+//}
+
+
+dependencies {
+//    compile 'com.google.guava:guava:18.0'
+//    providedCompile  'javax:javaee-api:7.0'
+}
+
+apply from : 'gradle/junit.gradle'
+
+defaultTasks 'clean','build'

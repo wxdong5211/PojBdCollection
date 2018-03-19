@@ -1,0 +1,4 @@
+##POJcom.impler.pojbd.poj1100.Main1010->main1000
+1 2
+#->
+3
